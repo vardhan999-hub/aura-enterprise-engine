@@ -1,266 +1,315 @@
-# Aura Enterprise Engine
+Aura Enterprise Engine
 
-Enterprise-grade inventory management dashboard built for handling **50,000+ SKUs** with high-performance search, filtering, analytics, and export capabilities.
+Project Overview
 
-Designed as a commercial-scale frontend system for logistics and retail operations.
-
----
-
-## Live Demo
-
-https://aura-enterprise-engine-peach.vercel.app/dashboard
+Aura Enterprise Engine is an enterprise inventory management platform built for a commercial logistics use case. The system manages over 50,000 SKUs across multiple warehouses with real-time analytics, advanced filtering, and instant search capabilities.
 
 ---
 
-# Project Overview
+Live Demo
 
-Aura Enterprise Engine is a modern inventory command center developed for large-scale warehouse and retail operations.
+[View Live Application](https://aura-enterprise-engine-peach.vercel.app/dashboard)
 
-The platform solves a critical performance problem:
-traditional spreadsheet-based systems and legacy ERP dashboards freeze when attempting to render massive datasets.
+---
 
-This solution introduces:
+The Business Problem
 
-- Server-side pagination
-- Debounced database search
-- Real-time analytics dashboards
-- Interactive inventory filtering
+The client managed inventory for over 40 retail chains using a combination of legacy software and spreadsheet-based workflows.
+
+Attempting to load the complete inventory dataset caused severe performance issues, browser freezes, delayed inventory updates, stockouts, and operational inefficiencies.
+
+---
+
+The Solution
+
+Aura Enterprise Engine provides a fast, scalable inventory command center capable of handling enterprise-scale datasets without browser performance degradation.
+
+The platform enables:
+
+- Instant inventory access
+- Advanced search and filtering
+- Real-time analytics
 - CSV export functionality
-- Enterprise-grade UI/UX
+- Executive-level operational visibility
 
 ---
 
-# Core Features
+Track
 
-## Enterprise Inventory Grid
-
-- Handles **50,000+ inventory records**
-- Server-side pagination (50 rows per request)
-- Sortable columns
-- Sticky table headers
-- Responsive UI
-- Status badges:
-  - In Stock
-  - Low Stock
-  - Out of Stock
+Frontend Specialist — Track A
 
 ---
 
-## Advanced Filtering
+Tech Stack
 
-### Global Search
-- 500ms debounced search
-- Prevents unnecessary API calls
-- Optimized for large datasets
+Frontend
 
-### Filters
-- Category dropdown
-- Price range filtering
-- Stock-level slider filtering
-
----
-
-## Analytics Command Center
-
-### KPI Cards
-- Total SKUs
-- Total Inventory Value
-- Out of Stock Items
-- Low Stock Items
-
-### Interactive Charts
-- Restock Priority Bar Chart
-- Portfolio Distribution Pie Chart
-
-Built using Recharts.
-
----
-
-## CSV Export Module
-
-Warehouse managers can export currently filtered inventory data into CSV format for:
-- supplier reports
-- offline analysis
-- procurement workflows
-
----
-
-# Tech Stack
-
-## Frontend
 - Next.js 16
 - React
 - TypeScript
 - Tailwind CSS
 
-## Backend / Database
+Backend & Database
+
 - Supabase
 - PostgreSQL
-- SQL RPC Functions
+- Supabase RPC Functions
 
-## Charts & Visualization
+Data Visualization
+
 - Recharts
 
-## Deployment
+Notifications
+
+- Sonner
+
+Deployment
+
 - Vercel
 
 ---
 
-# Performance Optimizations
+Core Features
 
-## Server-Side Pagination
-
-Only 50 records are fetched per request.
-
-Example:
-
-```ts
-query.range(from, to)
-```
-
-This prevents the browser from rendering all 50,000 rows simultaneously.
-
----
-
-## Debounced Search
-
-Search requests wait 500ms before querying the database.
-
-```ts
-const debouncedSearch = useDebounce(rawSearch, 500)
-```
-
-Reduces unnecessary network traffic and improves responsiveness.
-
----
-
-## Database-Level Aggregation
-
-Analytics calculations are handled directly inside PostgreSQL using RPC functions.
-
-### Example RPC
-
-```sql
-CREATE OR REPLACE FUNCTION get_inventory_kpis()
-```
-
-This avoids transferring massive datasets to the browser.
-
----
-
-# Folder Structure
-
-```bash
-app/
-components/
-hooks/
-lib/
-types/
-public/
-```
-
-### Important Modules
-
-| Folder | Purpose |
-|---|---|
-| `components/` | Reusable UI components |
-| `hooks/` | Custom React hooks |
-| `lib/` | Utility functions & Supabase client |
-| `types/` | Shared TypeScript interfaces |
-| `app/` | Next.js App Router pages |
-
----
-
-# Environment Variables
-
-Create a `.env.local` file:
-
-```env
-NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_key
-```
-
----
-
-# Installation
-
-## Clone Repository
-
-```bash
-git clone https://github.com/yourusername/aura-enterprise-engine.git
-```
-
-## Install Dependencies
-
-```bash
-npm install
-```
-
-## Run Development Server
-
-```bash
-npm run dev
-```
-
-Application runs at:
-
-```bash
-http://localhost:3000
-```
-
----
-
-# Database Setup
-
-Run the provided SQL schema inside Supabase SQL Editor.
-
-Includes:
-- Inventory table
-- Indexes
-- RLS policy
-- Sample dataset generation
-- KPI aggregation functions
-
-Dataset size:
-- 50,000 inventory records
-
----
-
-# Commercial Architecture Highlights
-
-## Scalability
-Designed for enterprise-scale inventory systems.
-
-## Performance
-Optimized network payloads and rendering strategy.
-
-## Maintainability
-Modular architecture with reusable components and hooks.
-
-## UX
-Fast, responsive, and data-dense enterprise dashboard interface.
-
----
-
-# Demonstrated Enterprise Features
+Enterprise Data Grid
 
 - Server-side pagination
-- Database-driven analytics
-- Large dataset handling
-- Optimized filtering/search
-- CSV reporting workflows
-- Real-time dashboard analytics
+- Fetches exactly 50 records per request
+- Supports 50,000+ inventory records
+- Sortable columns
+- Sticky table headers
+- Responsive interface
+- Color-coded inventory status indicators
+
+Status Indicators
+
+- In Stock
+- Low Stock
+- Out of Stock
 
 ---
 
-# Author
+Advanced Search & Filtering
 
-**Tadigadapa Harsha Vardhan**  
-Junior Software Engineer  
-Prodesk IT
+Debounced Omnisearch
+
+- 500ms debounce delay
+- Prevents unnecessary API calls
+- Optimized for large datasets
+
+Inventory Filters
+
+- Category dropdown
+- Price range filters
+- Stock-level slider
+- Combined filtering support
 
 ---
 
-# License
+Analytics Command Center
 
-This project is built for educational and portfolio demonstration purposes.
+KPI Dashboard
+
+- Total SKUs
+- Total Inventory Value
+- Out of Stock Items
+- Low Stock Items
+
+Restock Priority Chart
+
+Displays the top 10 products with the lowest stock levels.
+
+Portfolio Distribution Chart
+
+Displays inventory valuation breakdown by category.
+
+Database-Level Aggregation
+
+Analytics calculations are performed using PostgreSQL RPC functions to minimize frontend processing and network payload size.
+
+---
+
+CSV Export Module
+
+- One-click export
+- Exports currently filtered inventory data
+- Generates downloadable CSV reports
+- Supports offline reporting workflows
+
+---
+
+Architecture Highlights
+
+Server-Side Pagination
+
+User requests page 3
+→ Frontend calculates range(100,149)
+→ Supabase returns 50 records
+→ Browser renders only 50 rows
+→ Smooth performance at scale
+
+Debounced Search
+
+User types "Wireless Headphones"
+→ Debounce waits 500ms
+→ Single query is executed
+→ Reduces unnecessary requests
+→ Improves efficiency
+
+Database Aggregation
+
+Frontend calls RPC function
+→ PostgreSQL performs aggregation
+→ Returns final KPI values
+→ Minimal network payload
+→ Faster analytics rendering
+
+---
+
+Performance Optimizations
+
+- Handles 50,000+ inventory records efficiently
+- Server-side pagination
+- Database-level aggregation
+- Debounced search
+- Selective column fetching
+- Reduced network payload size
+- Optimized rendering performance
+
+---
+
+Folder Structure
+
+aura-enterprise-engine/
+├── app/
+│   ├── dashboard/
+│   │   └── page.tsx
+│   ├── globals.css
+│   └── layout.tsx
+│
+├── components/
+│   ├── analytics/
+│   │   ├── KPICards.tsx
+│   │   ├── StockBarChart.tsx
+│   │   └── CategoryPieChart.tsx
+│   │
+│   ├── inventory/
+│   │   ├── DataGrid.tsx
+│   │   ├── FilterPanel.tsx
+│   │   ├── SearchBar.tsx
+│   │   └── ExportButton.tsx
+│   │
+│   └── ui/
+│       └── Pagination.tsx
+│
+├── hooks/
+│   ├── useInventory.ts
+│   ├── useAnalytics.ts
+│   └── useDebounce.ts
+│
+├── lib/
+│   ├── supabase.ts
+│   └── exportCSV.ts
+│
+├── types/
+│   └── inventory.ts
+│
+├── Prompts.md
+└── README.md
+
+---
+
+Getting Started
+
+Clone Repository
+
+git clone https://github.com/vardhan999-hub/aura-enterprise-engine.git
+cd aura-enterprise-engine
+
+Install Dependencies
+
+npm install
+
+Start Development Server
+
+npm run dev
+
+Open:
+
+http://localhost:3000
+
+---
+
+Environment Variables
+
+Create a ".env.local" file in the project root:
+
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+
+---
+
+Database Setup
+
+Run the provided SQL schema inside the Supabase SQL Editor.
+
+This includes:
+
+- Inventory table
+- Database indexes
+- Row Level Security configuration
+- Sample inventory dataset
+- KPI aggregation functions
+- Category distribution functions
+
+Dataset size:
+
+50,000 Inventory Records
+
+---
+
+AI Assistance Documentation
+
+AI-assisted engineering decisions and implementation notes are documented in:
+
+Prompts.md
+
+Topics covered include:
+
+- Debounced search architecture
+- Server-side pagination
+- PostgreSQL RPC functions
+- CSV export implementation
+
+---
+
+Performance Demonstration
+
+The application demonstrates:
+
+- 50 records fetched per request
+- Server-side pagination
+- Debounced search behavior
+- Real-time analytics
+- Interactive charts
+- CSV export workflows
+
+---
+
+Engineer
+
+Tadigadapa Harsha Vardhan
+
+Frontend Intern — Prodesk IT
+
+GitHub:
+https://github.com/vardhan999-hub
+
+LinkedIn:
+https://www.linkedin.com/in/harshatadigadapa
+
+---
+
+License
+
+This project was developed for educational, internship, and portfolio demonstration purposes.
